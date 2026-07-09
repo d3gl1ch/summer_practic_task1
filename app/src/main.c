@@ -53,6 +53,12 @@ int main(int argc, char *argv[]) {
     const char *input_path = argv[1];
     const char *output_path = argv[2];
 
+    // Запрещаем использовать один и тот же файл для чтения и записи
+    if (strcmp(input_path, output_path) == 0) {
+        fprintf(stderr, "Ошибка: входной и выходной файлы не могут совпадать.\n");
+        return 1;
+    }
+
     size_t pattern_len = 0;
     uint8_t *pattern = hex_to_bytes(argv[3], &pattern_len);
     if (!pattern) {
